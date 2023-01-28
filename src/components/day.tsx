@@ -13,8 +13,8 @@ export const Day: React.FC<Props> = ({ day }) => {
   return (
     <div className={`border border-gray-200 flex flex-col px-2 py-1 ${getCurrentDayClass()}`}>
       <header className="flex justify-between">
-        <p className="font-bold text-xs p-1">{day.format('DD')}</p>
-        <p className="font-bold text-xs p-1">{day.format('dd')}</p>
+        <p className="font-bold select-none text-xs p-1">{day.format('DD')}</p>
+        <p className="font-bold select-none text-xs p-1">{day.format('dd')}</p>
       </header>
     </div>
   );
