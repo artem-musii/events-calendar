@@ -55,8 +55,8 @@ export const EventForm: React.FC = () => {
           </div>
 
           {selectedEvent && (
-            <span className="text-xs">
-              Created at: {dayjs(selectedEvent.date).format('DD.MM.YYYY HH:mm')}
+            <span className="text-xs text-gray-400">
+              Created at: {date} {time}
             </span>
           )}
         </header>
