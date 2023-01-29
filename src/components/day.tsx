@@ -44,7 +44,7 @@ export const Day: React.FC<Props> = ({ day }) => {
         <p className="font-bold select-none text-xs p-1">{day.format('DD')}</p>
         <p className="font-bold select-none text-xs p-1">{day.format('dd')}</p>
       </header>
-      <div className="overflow-scroll">
+      <div className="overflow-scroll scrollbar scrollbar-w-1 scrollar-h-1">
         {dayEvents.map((event) => (
           <div
             key={event.id}
