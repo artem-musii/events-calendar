@@ -2,18 +2,6 @@
 
 This is a simple calendar event app built using React.js. It allows you to view and manage your events in a calendar view. [DEMO link](https://artem-musii.github.io/events-calendar/)
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ## Features
   - View events in a calendar view
   - Add new events by clicking on a date
