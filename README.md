@@ -1,6 +1,6 @@
 # Calendar App
 
-This is a simple calendar event app built using React.js. It allows you to view and manage your events in a calendar view.
+This is a simple calendar event app built using React.js. It allows you to view and manage your events in a calendar view. [DEMO link](https://artem-musii.github.io/events-calendar/)
 
 ## Available Scripts
 
