@@ -95,7 +95,7 @@ export const EventForm: React.FC = () => {
               <DatePicker
                 className="cursor-pointer h-10 pb-2 w-fit text-xl border-b-2 border-gray-400"
                 selected={new Date()}
-                customInput={<div>{date}</div>}
+                customInput={<div>{dayjs(date).format('DD.MM.YYYY')}</div>}
                 onChange={(e) => setDate(dayjs(e).format('DD.MM.YYYY'))}
               />
             </div>
