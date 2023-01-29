@@ -8,7 +8,7 @@ export const EventForm: React.FC = () => {
   const { setShowEventForm, dispatchSavedEvents, selectedEvent, setSelectedEvent } =
     useContext(GlobalContext);
   const [date, setDate] = useState<string | null>(
-    selectedEvent ? selectedEvent.date : dayjs().format('DD.MM.YYYY')
+    selectedEvent ? selectedEvent.date : dayjs().format()
   );
   const [time, setTime] = useState(selectedEvent ? selectedEvent.time : dayjs().format('HH:mm'));
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : '');
