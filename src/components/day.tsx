@@ -12,9 +12,7 @@ export const Day: React.FC<Props> = ({ day }) => {
   const { monthIndex, savedEvents, setSelectedEvent } = useContext(GlobalContext);
 
   useEffect(() => {
-    const events = savedEvents.filter(
-      (event) => dayjs(event.date).format('DD-MM-YYYY') === day.format('DD-MM-YYYY')
-    );
+    const events = savedEvents.filter((event) => event.date === day.format('DD.MM.YYYY'));
     setDayEvents(events);
   }, [day, savedEvents, setDayEvents]);
 
@@ -38,7 +36,7 @@ export const Day: React.FC<Props> = ({ day }) => {
 
   return (
     <div
-      className={`border max-h-32 border-gray-200 flex flex-col px-2 py-1 ${getCurrentDayClass()} ${getCurrentMonthClass()}`}
+      className={`border h-28 border-gray-200 flex flex-col px-2 py-1 ${getCurrentDayClass()} ${getCurrentMonthClass()}`}
     >
       <header className="flex justify-between mb-1">
         <p className="font-bold select-none text-xs p-1">{day.format('DD')}</p>
@@ -49,7 +47,7 @@ export const Day: React.FC<Props> = ({ day }) => {
           <div
             key={event.id}
             onClick={() => setSelectedEvent(event)}
-            className="pl-1 cursor-pointer mb-1 rounded text-white hover:bg-cyan-700 bg-cyan-600 truncate"
+            className="pl-1 cursor-pointer h-22 mb-1 rounded text-white hover:bg-cyan-700 bg-cyan-600 truncate"
           >
             {event.title}
           </div>
