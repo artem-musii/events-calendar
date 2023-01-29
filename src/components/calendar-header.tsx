@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/global-context';
 import { CalendarDatePicker } from './calendar-date-picker';
 
 export const CalendarHeader: React.FC = () => {
-  const { monthIndex, setMonthIndex } = useContext(GlobalContext);
+  const { monthIndex, setMonthIndex, setShowEventForm } = useContext(GlobalContext);
 
   const handleNextMonth = () => {
     setMonthIndex(monthIndex + 1);
@@ -15,11 +15,19 @@ export const CalendarHeader: React.FC = () => {
     setMonthIndex(monthIndex - 1);
   };
 
+  const handleClick = () => {
+    setShowEventForm(true);
+  };
+
   return (
     <header className="flex justify-between align-middle py-4">
-      <button className="bg-cyan-600 flex justify-center items-center w-10 h-10 hover:bg-cyan-700 text-white rounded-full">
+      <button
+        onClick={handleClick}
+        className="bg-cyan-600 flex justify-center items-center w-10 h-10 hover:bg-cyan-700 text-white rounded-full"
+      >
         <PlusIcon className="h-6 w-6" />
       </button>
+
       <div className="flex items-center">
         <div className="flex pr-4 items-center">
           <ChevronLeftIcon onClick={handlePrevMonth} className="h-8 w-8 cursor-pointer" />

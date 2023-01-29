@@ -3,9 +3,10 @@ import { getMonth } from './util';
 import { Month } from './components/month';
 import { CalendarHeader } from './components/calendar-header';
 import { GlobalContext } from './context/global-context';
+import { EventForm } from './components/event-form';
 
 function App() {
-  const { monthIndex } = useContext(GlobalContext);
+  const { monthIndex, showEventForm } = useContext(GlobalContext);
 
   const [month, setMonth] = useState(getMonth());
 
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="h-screen flex flex-col p-4 mx-auto max-w-6xl">
+      {showEventForm && <EventForm />}
       <CalendarHeader />
       <Month month={month} />
     </div>
