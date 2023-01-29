@@ -7,7 +7,9 @@ import dayjs from 'dayjs';
 export const EventForm: React.FC = () => {
   const { setShowEventForm, dispatchSavedEvents, selectedEvent, setSelectedEvent } =
     useContext(GlobalContext);
-  const [date, setDate] = useState<Date | null>(selectedEvent ? selectedEvent.date : new Date());
+  const [date, setDate] = useState<string | null>(
+    selectedEvent ? selectedEvent.date : dayjs().format('DD.MM.YYYY')
+  );
   const [time, setTime] = useState(selectedEvent ? selectedEvent.time : dayjs().format('HH:mm'));
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : '');
   const [description, setDescription] = useState(
@@ -16,6 +18,7 @@ export const EventForm: React.FC = () => {
 
   const handleClose = () => {
     setShowEventForm(false);
+    setSelectedEvent(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -91,9 +94,9 @@ export const EventForm: React.FC = () => {
 
               <DatePicker
                 className="cursor-pointer h-10 pb-2 w-fit text-xl border-b-2 border-gray-400"
-                selected={date}
-                customInput={<div>{dayjs(date).format('DD.MM.YYYY')}</div>}
-                onChange={(e) => setDate(e)}
+                selected={new Date()}
+                customInput={<div>{date}</div>}
+                onChange={(e) => setDate(dayjs(e).format('DD.MM.YYYY'))}
               />
             </div>
 
