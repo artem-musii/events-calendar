@@ -9,7 +9,7 @@ type Props = {
 
 export const Day: React.FC<Props> = ({ day }) => {
   const [dayEvents, setDayEvents] = useState<IEvent[]>([]);
-  const { monthIndex, savedEvents } = useContext(GlobalContext);
+  const { monthIndex, savedEvents, setSelectedEvent } = useContext(GlobalContext);
 
   useEffect(() => {
     const events = savedEvents.filter(
@@ -46,7 +46,11 @@ export const Day: React.FC<Props> = ({ day }) => {
       </header>
       <div className="overflow-scroll">
         {dayEvents.map((event) => (
-          <div className="pl-1 cursor-pointer mb-1 rounded text-white hover:bg-cyan-700 bg-cyan-600 truncate">
+          <div
+            key={event.id}
+            onClick={() => setSelectedEvent(event)}
+            className="pl-1 cursor-pointer mb-1 rounded text-white hover:bg-cyan-700 bg-cyan-600 truncate"
+          >
             {event.title}
           </div>
         ))}

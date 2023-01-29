@@ -1,15 +1,18 @@
 import React, { useContext, useState } from 'react';
-import { XMarkIcon } from '@heroicons/react/20/solid';
+import { XMarkIcon, TrashIcon } from '@heroicons/react/20/solid';
 import { GlobalContext } from '../context/global-context';
 import DatePicker from 'react-datepicker';
 import dayjs from 'dayjs';
 
 export const EventForm: React.FC = () => {
-  const { setShowEventForm, dispatchSavedEvents } = useContext(GlobalContext);
-  const [date, setDate] = useState<Date | null>(new Date());
-  const [time, setTime] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const { setShowEventForm, dispatchSavedEvents, selectedEvent, setSelectedEvent } =
+    useContext(GlobalContext);
+  const [date, setDate] = useState<Date | null>(selectedEvent ? selectedEvent.date : new Date());
+  const [time, setTime] = useState(selectedEvent ? selectedEvent.time : dayjs().format('HH:mm'));
+  const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : '');
+  const [description, setDescription] = useState(
+    selectedEvent?.description ? selectedEvent.description : ''
+  );
 
   const handleClose = () => {
     setShowEventForm(false);
@@ -18,29 +21,41 @@ export const EventForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (title.trim()) {
-      const calendarEvent = {
-        title,
-        description,
-        id: Date.now(),
-        createdAt: new Date(),
-        date: date,
-        time: time
-      };
+    const calendarEvent = {
+      title,
+      description,
+      id: selectedEvent ? selectedEvent.id : Date.now(),
+      createdAt: new Date(),
+      date: date,
+      time: time
+    };
 
-      dispatchSavedEvents({ type: 'push', payload: calendarEvent });
-      setShowEventForm(false);
-    }
+    const type = selectedEvent ? 'update' : 'push';
+
+    dispatchSavedEvents({ type, payload: calendarEvent });
+    setShowEventForm(false);
+    setSelectedEvent(null);
   };
 
   return (
     <div className="h-screen w-full z-10 fixed left-0 top-0 flex justify-center items-center">
-      <form className="bg-white rounded w-1/3 z-5 bg-gray-100">
-        <header className="p-4 select-none flex justify-between items-center">
-          <span className="font-semi-bold text-2xl">Add new event</span>
-          <button onClick={handleClose}>
-            <XMarkIcon className="w-6 h-6 text-gray-400" />
-          </button>
+      <form onSubmit={handleSubmit} className="bg-white rounded w-1/3 z-5 bg-gray-100">
+        <header className="p-4 select-none">
+          <div className="flex justify-between items-center">
+            <span className="font-semi-bold text-2xl">
+              {selectedEvent ? `Edit ${selectedEvent.title} event` : 'Add event'}
+            </span>
+
+            <button onClick={handleClose}>
+              <XMarkIcon className="w-6 h-6 text-gray-400" />
+            </button>
+          </div>
+
+          {selectedEvent && (
+            <span className="text-xs">
+              Created at: {dayjs(selectedEvent.date).format('DD.MM.YYYY HH:mm')}
+            </span>
+          )}
         </header>
 
         <div className="p-4">
@@ -97,10 +112,17 @@ export const EventForm: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex justify-end">
-            <button onClick={handleSubmit} className="p-2 bg-cyan-600 text-white w-24 rounded">
-              Save
-            </button>
+          <div className="flex justify-end gap-2">
+            {selectedEvent && (
+              <button
+                onClick={() => dispatchSavedEvents({ type: 'delete', payload: selectedEvent })}
+                className="p-2 bg-red-600 text-white w-10 rounded"
+              >
+                <TrashIcon />
+              </button>
+            )}
+
+            <button className="p-2 bg-cyan-600 text-white w-24 rounded">Save</button>
           </div>
         </div>
       </form>

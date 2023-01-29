@@ -14,5 +14,7 @@ export const GlobalContext = createContext({
   showEventForm: false,
   setShowEventForm: (_bool: boolean) => {},
   dispatchSavedEvents: ({ type, payload }: Action) => {},
-  savedEvents: [] as IEvent[]
+  savedEvents: [] as IEvent[],
+  selectedEvent: null as null | IEvent,
+  setSelectedEvent: (_event: IEvent | null) => {}
 });

@@ -36,6 +36,7 @@ const initEvents = () => {
 export const ContextWrapper: React.FC<Props> = ({ children }) => {
   const [monthIndex, setIndex] = useState(+storage.get('monthIndex'));
   const [showEventForm, setShowEventForm] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(null);
   const [savedEvents, dispatchSavedEvents] = useReducer(savedEventsReducer, [], initEvents);
 
   useEffect(() => {
@@ -55,7 +56,9 @@ export const ContextWrapper: React.FC<Props> = ({ children }) => {
         showEventForm,
         setShowEventForm,
         dispatchSavedEvents,
-        savedEvents
+        savedEvents,
+        selectedEvent,
+        setSelectedEvent
       }}
     >
       {children}
