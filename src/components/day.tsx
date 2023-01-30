@@ -24,7 +24,8 @@ export const Day: React.FC<Props> = ({ day }) => {
     let index = monthIndex;
 
     if (monthIndex < 0) {
-      index = 12 - Math.abs(index % 12);
+      index = 12 - (Math.abs(index % 12) || 12);
+      console.log(index);
     }
 
     if (monthIndex > 0) {
